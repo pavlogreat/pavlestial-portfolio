@@ -1,21 +1,21 @@
 # Pavlestial Portfolio
 
-This is a static portfolio site with a Three.js particle background. The project includes a `netlify.toml` file so it can be deployed directly to Netlify.
+A lightweight sci‑fi themed portfolio powered by Three.js particles. The site is fully static and can be deployed to Netlify with no build step.
 
 ## Deploying to Netlify
 
-1. Create a free account at [Netlify](https://www.netlify.com/).
-2. From the Netlify dashboard choose **"Add new site"** > **"Import an existing project"** and connect your Git repository.
-3. When prompted for build settings, use the following:
+1. Fork this repo or push it to your own GitHub account.
+2. Sign in to [Netlify](https://www.netlify.com/) and choose **Add new site** → **Import an existing project**.
+3. Select your repository and keep the default build settings:
    - **Build command:** *(leave empty)*
    - **Publish directory:** `./`
-4. Click **Deploy Site**. Netlify will build and host the site automatically.
+4. Click **Deploy Site**. Netlify will build and host the portfolio automatically.
 
-To preview a deployment locally you can use the Netlify CLI:
+### Preview locally
+
+Install the Netlify CLI and run `netlify dev` to test the site at `http://localhost:8888`.
 
 ```bash
-npm install -g netlify-cli  # if not installed
+npm install -g netlify-cli
 netlify dev
 ```
-
-This will serve the site at `http://localhost:8888` using the settings from `netlify.toml`.
