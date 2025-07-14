@@ -1,6 +1,6 @@
 # Pavlestial Portfolio
 
-A lightweight sci‑fi themed portfolio powered by Three.js particles. The site is fully static and can be deployed to Netlify with no build step.
+A lightweight sci‑fi themed portfolio powered by Three.js particles. Click anywhere to morph between generative patterns rendered with custom shaders. The site is fully static and can be deployed to Netlify with no build step.
 
 ## Deploying to Netlify
 

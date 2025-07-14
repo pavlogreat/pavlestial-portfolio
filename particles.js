@@ -56,15 +56,23 @@ const fragmentShader = `
     }
 `;
 
+const patterns = [
+    [new THREE.Vector3(1.2, 1.3, 1.1), new THREE.Vector3(2.0, 1.7, 2.3)],
+    [new THREE.Vector3(0.8, 2.3, 1.5), new THREE.Vector3(1.5, 1.0, 2.5)],
+    [new THREE.Vector3(1.4, 0.8, 2.1), new THREE.Vector3(2.2, 2.5, 0.7)]
+];
+let current = 0;
+const uniforms = {
+    time: { value: 0 },
+    paramsA: { value: patterns[0][0].clone() },
+    paramsB: { value: patterns[0][1].clone() },
+    morph: { value: 0 }
+};
+
 const material = new THREE.ShaderMaterial({
     vertexShader,
     fragmentShader,
-    uniforms: {
-        time: { value: 0 },
-        paramsA: { value: new THREE.Vector3(1.2, 1.3, 1.1) },
-        paramsB: { value: new THREE.Vector3(2.0, 1.7, 2.3) },
-        morph: { value: 0 }
-    }
+    uniforms
 });
 
 const points = new THREE.Points(geometry, material);
@@ -75,14 +83,18 @@ composer.addPass(new RenderPass(scene, camera));
 const bloom = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.2, 0.4, 0.85);
 composer.addPass(bloom);
 
-let target = 0;
 window.addEventListener('click', () => {
-    target = 1 - target;
-    material.uniforms.morph.value = target;
+    current = (current + 1) % patterns.length;
+    uniforms.paramsA.value = patterns[current][0];
+    uniforms.paramsB.value = patterns[current][1];
+    uniforms.morph.value = 0;
 });
 
 function animate(ms) {
-    material.uniforms.time.value = ms * 0.001;
+    uniforms.time.value = ms * 0.001;
+    if (uniforms.morph.value < 1) {
+        uniforms.morph.value += 0.01;
+    }
     controls.update();
     composer.render();
     requestAnimationFrame(animate);
