@@ -15,6 +15,51 @@ body {
     background:
         repeating-linear-gradient(0deg, rgba(0,255,238,0.05) 0, rgba(0,255,238,0.05) 1px, transparent 1px, transparent 80px),
         repeating-linear-gradient(90deg, rgba(0,255,238,0.05) 0, rgba(0,255,238,0.05) 1px, transparent 1px, transparent 80px);
+    background-size: 80px 80px;
+    animation: gridScroll 30s linear infinite;
+}
+
+.crosshair {
+    pointer-events: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: -40px;
+    z-index: 10;
+    animation: pulse 2s infinite;
+    transform: translate(-50%, -50%);
+    transform-origin: center;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background: #00ffee;
+}
+
+.crosshair::before {
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+.crosshair::after {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
 }
 .hud {
     background: rgba(0,0,0,0.6);
@@ -45,4 +90,9 @@ section { scroll-margin-top: 60px; }
     #menu-toggle { display:block; }
     #nav { position:absolute; top:60px; right:0; background:rgba(0,0,0,0.9); flex-direction:column; align-items:flex-start; padding:1rem; display:none; }
     #nav.show { display:flex; }
+}
+
+@keyframes gridScroll {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 0 80px, 80px 0; }
 }
